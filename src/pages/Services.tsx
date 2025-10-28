@@ -2,10 +2,19 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Code, ShoppingCart, Share2, TestTube, Smartphone, Palette } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import servicesBg from '@/assets/services-bg.jpg';
 
 const Services = () => {
+  const [scrollY, setScrollY] = useState(0);
+
   useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -19,7 +28,10 @@ const Services = () => {
 
     document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, []);
   const services = [
     {
@@ -58,8 +70,22 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <div className="pt-32 pb-20 px-6">
-        <div className="container mx-auto">
+      <div 
+        className="pt-32 pb-20 px-6 relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${servicesBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div 
+          className="absolute inset-0 bg-background/85"
+          style={{
+            transform: `translateY(${scrollY * 0.3}px)`,
+          }}
+        />
+        <div className="container mx-auto relative z-10">
           {/* Page Title */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Services</h1>
