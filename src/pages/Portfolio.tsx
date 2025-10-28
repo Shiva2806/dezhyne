@@ -4,8 +4,25 @@ import { Card } from '@/components/ui/card';
 import portfolio1 from '@/assets/portfolio-1.jpg';
 import portfolio2 from '@/assets/portfolio-2.jpg';
 import portfolio3 from '@/assets/portfolio-3.jpg';
+import { useEffect } from 'react';
 
 const Portfolio = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
   const portfolioItems = [
     {
       image: portfolio1,
@@ -73,7 +90,7 @@ const Portfolio = () => {
             {portfolioItems.map((item, index) => (
               <Card 
                 key={index}
-                className="overflow-hidden hover-lift border-border bg-card group cursor-pointer"
+                className={`overflow-hidden hover-lift border-border bg-card group cursor-pointer fade-in-up stagger-${(index % 6) + 1}`}
               >
                 <div className="relative overflow-hidden">
                   <img 

@@ -2,8 +2,25 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Code, ShoppingCart, Share2, TestTube, Smartphone, Palette } from 'lucide-react';
+import { useEffect } from 'react';
 
 const Services = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
   const services = [
     {
       icon: Code,
@@ -56,7 +73,7 @@ const Services = () => {
             {services.map((service, index) => (
               <Card 
                 key={index}
-                className="p-8 bg-card hover-lift border-border group"
+                className={`p-8 bg-card hover-lift border-border group fade-in-up stagger-${(index % 6) + 1}`}
               >
                 <div className="flex items-start gap-4">
                   <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">

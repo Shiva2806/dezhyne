@@ -4,12 +4,40 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Code, ShoppingCart, Share2, Star } from 'lucide-react';
-import heroImg from '@/assets/hero-bg.jpg';
+import heroImg from '@/assets/hero-bg-enhanced.jpg';
+import { useEffect, useState } from 'react';
 import portfolio1 from '@/assets/portfolio-1.jpg';
 import portfolio2 from '@/assets/portfolio-2.jpg';
 import portfolio3 from '@/assets/portfolio-3.jpg';
 
 const Index = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
   const services = [
     {
       icon: Code,
@@ -52,24 +80,27 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section 
-        className="relative min-h-screen flex items-center justify-center pt-20 px-6"
-        style={{
-          backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.9)), url(${heroImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="container mx-auto text-center max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+      <section className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.85)), url(${heroImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            transform: `translateY(${scrollY * 0.5}px)`,
+            willChange: 'transform',
+          }}
+        />
+        <div className="container mx-auto text-center max-w-4xl relative z-10">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in drop-shadow-lg">
             Crafting the Future of
             <span className="block gradient-text">Digital Experiences</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">
+          <p className="text-xl text-foreground mb-8 max-w-2xl mx-auto animate-fade-in drop-shadow-md">
             We transform visionary ideas into stunning digital realities. Our expert team delivers innovative solutions that drive growth and captivate audiences.
           </p>
           <Link to="/portfolio">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 hover-glow text-lg px-8 py-6 animate-fade-in">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 hover-glow text-lg px-8 py-6 animate-fade-in shadow-lg">
               View Our Work
             </Button>
           </Link>
@@ -88,7 +119,7 @@ const Index = () => {
             {services.map((service, index) => (
               <Card 
                 key={index}
-                className="p-8 bg-card hover-lift border-border"
+                className={`p-8 bg-card hover-lift border-border fade-in-up stagger-${index + 1}`}
               >
                 <service.icon className="w-12 h-12 text-primary mb-4" />
                 <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
@@ -111,7 +142,7 @@ const Index = () => {
             {portfolioItems.map((item, index) => (
               <Card 
                 key={index}
-                className="overflow-hidden hover-lift border-border bg-background"
+                className={`overflow-hidden hover-lift border-border bg-background fade-in-up stagger-${index + 1}`}
               >
                 <img 
                   src={item.image} 
@@ -137,7 +168,7 @@ const Index = () => {
           
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-8 bg-card border-border">
+              <Card key={index} className={`p-8 bg-card border-border fade-in-up stagger-${index + 1}`}>
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 fill-primary text-primary" />

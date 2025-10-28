@@ -5,8 +5,25 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { MapPin, Clock, Phone, Mail } from 'lucide-react';
+import { useEffect } from 'react';
 
 const Contact = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -24,7 +41,7 @@ const Contact = () => {
           {/* Contact Layout */}
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
-            <Card className="p-8 bg-card border-border">
+            <Card className="p-8 bg-card border-border fade-in-up stagger-1">
               <form className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Your Name</label>
@@ -69,7 +86,7 @@ const Contact = () => {
             </Card>
 
             {/* Contact Information */}
-            <div>
+            <div className="fade-in-up stagger-2">
               <Card className="p-8 bg-card border-border mb-8">
                 <h3 className="text-2xl font-bold mb-6">Contact Us</h3>
                 
