@@ -27,6 +27,7 @@ const Services = () => {
 
     return () => observer.disconnect();
   }, []);
+
   const services = [
     {
       icon: Code,

@@ -1,13 +1,59 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import logo from '@/assets/logo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary border-t border-border py-16">
+    <footer className="bg-gradient-to-br from-secondary to-purple-50 py-16">
       <div className="container mx-auto px-6">
+        {/* CTA Section */}
+        <div className="text-center mb-16 fade-in-up">
+          <h2 className="text-5xl font-bold mb-6">Let's start something great together</h2>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Ready to transform your digital presence? Get in touch and let's create something amazing.
+          </p>
+          <div className="flex gap-4 justify-center items-center">
+            <Link to="/contact">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 px-8 py-6 text-lg">
+                Let's Talk
+              </Button>
+            </Link>
+            <div className="flex gap-3">
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-3 rounded-full bg-white hover:bg-primary hover:text-white transition-all hover-lift"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-3 rounded-full bg-white hover:bg-primary hover:text-white transition-all hover-lift"
+              >
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a 
+                href="mailto:info@dezhyne.com" 
+                className="p-3 rounded-full bg-white hover:bg-primary hover:text-white transition-all hover-lift"
+              >
+                <Mail className="w-5 h-5" />
+              </a>
+              <a 
+                href="tel:+916383975308" 
+                className="p-3 rounded-full bg-white hover:bg-primary hover:text-white transition-all hover-lift"
+              >
+                <Phone className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
           <div className="space-y-4">
@@ -21,32 +67,6 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground leading-relaxed">
               Transforming visionary ideas into stunning digital realities through innovative design and cutting-edge technology.
             </p>
-            <div className="flex gap-4">
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-white hover:bg-primary hover:text-white transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-white hover:bg-primary hover:text-white transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-white hover:bg-primary hover:text-white transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
           {/* Newsletter Column */}
@@ -110,7 +130,7 @@ const Footer = () => {
           </p>
           <Link 
             to="/privacy" 
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            className="text-xs text-muted-foreground hover:text-primary transition-colors"
           >
             Privacy Policy
           </Link>

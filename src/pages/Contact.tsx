@@ -24,121 +24,112 @@ const Contact = () => {
 
     return () => observer.disconnect();
   }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
       
       <div className="pt-32 pb-20 px-6">
-        <div className="container mx-auto">
+        <div className="container mx-auto max-w-4xl">
           {/* Page Title */}
-          <div className="text-center mb-16 max-w-3xl mx-auto fade-in-up">
-            <h1 className="text-6xl font-bold mb-6">Get In Touch</h1>
-            <p className="text-xl text-muted-foreground">
-              Ready to start your next project? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+          <div className="text-center mb-16 fade-in-up">
+            <h1 className="text-6xl font-bold mb-6">Drop Us a Message</h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              We're excited to work with you! Please share your details, and we'll respond within 2 business days.
             </p>
           </div>
 
-          {/* Contact Layout */}
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Form */}
-            <Card className="p-8 bg-card border-border fade-in-up stagger-1">
-              <form className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Your Name</label>
-                  <Input 
-                    placeholder="John Doe" 
-                    className="bg-background border-border"
-                  />
+          {/* Contact Form */}
+          <Card className="p-12 bg-white border-border mb-16 fade-in-up stagger-1">
+            <form className="space-y-8">
+              <div>
+                <Input 
+                  placeholder="Your Name" 
+                  className="underline-input"
+                />
+              </div>
+              
+              <div>
+                <Input 
+                  type="email"
+                  placeholder="Your Email Address *" 
+                  className="underline-input"
+                  required
+                />
+              </div>
+              
+              <div>
+                <Input 
+                  type="tel"
+                  placeholder="Your Phone Number" 
+                  className="underline-input"
+                />
+              </div>
+              
+              <div>
+                <Textarea 
+                  placeholder="Tell us about your project... *"
+                  rows={5}
+                  className="underline-input resize-none"
+                  required
+                />
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full bg-primary hover:bg-primary/90 hover-glow"
+                size="lg"
+              >
+                Send Message
+              </Button>
+            </form>
+          </Card>
+
+          {/* Contact Information */}
+          <div className="fade-in-up stagger-2">
+            <div className="grid md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-lg mb-3">
+                  <MapPin className="w-6 h-6 text-primary" />
                 </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Your Email Address <span className="text-primary">*</span>
-                  </label>
-                  <Input 
-                    type="email"
-                    placeholder="john@example.com" 
-                    className="bg-background border-border"
-                    required
-                  />
+                <p className="font-semibold mb-1">Address</p>
+                <p className="text-sm text-muted-foreground">123 Business Ave, City</p>
+              </div>
+
+              <div>
+                <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-lg mb-3">
+                  <Phone className="w-6 h-6 text-primary" />
                 </div>
-                
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Your Message <span className="text-primary">*</span>
-                  </label>
-                  <Textarea 
-                    placeholder="Tell us about your project..."
-                    rows={6}
-                    className="bg-background border-border resize-none"
-                    required
-                  />
+                <p className="font-semibold mb-1">Phone</p>
+                <p className="text-sm text-muted-foreground">+91 6383975308</p>
+              </div>
+
+              <div>
+                <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-lg mb-3">
+                  <Mail className="w-6 h-6 text-primary" />
                 </div>
+                <p className="font-semibold mb-1">Email</p>
+                <p className="text-sm text-muted-foreground">info@dezhyne.com</p>
+              </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 hover-glow"
-                  size="lg"
-                >
-                  Send Message
-                </Button>
-              </form>
-            </Card>
-
-            {/* Contact Information */}
-            <div className="fade-in-up stagger-2">
-              <Card className="p-8 bg-card border-border mb-8">
-                <h3 className="text-2xl font-bold mb-6">Contact Us</h3>
-                
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <MapPin className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold mb-1">Address</p>
-                      <p className="text-muted-foreground">123 Business Ave, City</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Clock className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold mb-1">Hours</p>
-                      <p className="text-muted-foreground">Monday - Friday: 9 AM - 5 PM</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Phone className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold mb-1">Phone</p>
-                      <p className="text-muted-foreground">+91 6383975308</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Mail className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold mb-1">Email</p>
-                      <p className="text-muted-foreground">info@dezhyne.com</p>
-                    </div>
-                  </div>
+              <div>
+                <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-lg mb-3">
+                  <Clock className="w-6 h-6 text-primary" />
                 </div>
-              </Card>
+                <p className="font-semibold mb-1">Hours</p>
+                <p className="text-sm text-muted-foreground">Mon-Fri: 9 AM - 5 PM</p>
+              </div>
+            </div>
 
-              {/* Map Placeholder */}
-              <Card className="overflow-hidden border-border">
-                <div className="w-full h-64 bg-muted flex items-center justify-center">
-                  <p className="text-muted-foreground">Map Location</p>
-                </div>
-              </Card>
+            <div className="text-center mt-8">
+              <a 
+                href="https://maps.google.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary hover:underline text-sm font-medium"
+              >
+                View on Google Maps →
+              </a>
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
 import portfolio1 from '@/assets/portfolio-1.jpg';
 import portfolio2 from '@/assets/portfolio-2.jpg';
 import portfolio3 from '@/assets/portfolio-3.jpg';
@@ -10,9 +12,10 @@ import portfolio6 from '@/assets/portfolio-6.jpg';
 import portfolio7 from '@/assets/portfolio-7.jpg';
 import portfolio8 from '@/assets/portfolio-8.jpg';
 import portfolio9 from '@/assets/portfolio-9.jpg';
-import { useEffect } from 'react';
 
 const Portfolio = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -29,53 +32,24 @@ const Portfolio = () => {
 
     return () => observer.disconnect();
   }, []);
-  const portfolioItems = [
-    {
-      image: portfolio1,
-      title: 'Modern Ecommerce Platform',
-      category: 'Ecommerce',
-    },
-    {
-      image: portfolio2,
-      title: 'Social Analytics Dashboard',
-      category: 'Web Application',
-    },
-    {
-      image: portfolio3,
-      title: 'Corporate Website Redesign',
-      category: 'Website',
-    },
-    {
-      image: portfolio4,
-      title: 'Fashion Brand Store',
-      category: 'Ecommerce',
-    },
-    {
-      image: portfolio5,
-      title: 'Marketing Automation Tool',
-      category: 'SaaS Platform',
-    },
-    {
-      image: portfolio6,
-      title: 'Real Estate Portal',
-      category: 'Website',
-    },
-    {
-      image: portfolio7,
-      title: 'Healthcare Management System',
-      category: 'Web Application',
-    },
-    {
-      image: portfolio8,
-      title: 'Restaurant Ordering App',
-      category: 'Mobile App',
-    },
-    {
-      image: portfolio9,
-      title: 'Financial Services Platform',
-      category: 'Website',
-    },
+
+  const projects = [
+    { image: portfolio1, title: 'Brand Identity Design', category: 'Branding', tag: 'Branding' },
+    { image: portfolio2, title: 'E-commerce Platform', category: 'E-commerce', tag: 'E-commerce' },
+    { image: portfolio3, title: 'Mobile App Design', category: 'UI/UX', tag: 'UI/UX' },
+    { image: portfolio4, title: 'Corporate Website', category: 'Branding', tag: 'Web Development' },
+    { image: portfolio5, title: 'Social Media Campaign', category: 'UI/UX', tag: 'Marketing' },
+    { image: portfolio6, title: 'Luxury Fashion Store', category: 'E-commerce', tag: 'E-commerce' },
+    { image: portfolio7, title: 'SaaS Dashboard', category: 'UI/UX', tag: 'UI/UX' },
+    { image: portfolio8, title: 'Restaurant Branding', category: 'Branding', tag: 'Branding' },
+    { image: portfolio9, title: 'Tech Startup Website', category: 'E-commerce', tag: 'Web Development' },
   ];
+
+  const filters = ['All', 'Branding', 'E-commerce', 'UI/UX'];
+
+  const filteredProjects = activeFilter === 'All' 
+    ? projects 
+    : projects.filter(p => p.category === activeFilter);
 
   return (
     <div className="min-h-screen bg-white">
@@ -83,37 +57,51 @@ const Portfolio = () => {
       
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
-          {/* Page Title */}
-          <div className="text-center mb-16 max-w-3xl mx-auto fade-in-up">
+          <div className="text-center mb-12 max-w-3xl mx-auto fade-in-up">
             <h1 className="text-6xl font-bold mb-6">Our Work</h1>
             <p className="text-xl text-muted-foreground">
-              Explore our portfolio of successful projects. Each one represents our commitment to delivering exceptional digital experiences that drive real results for our clients.
+              Where Creativity Meets Results – A showcase of projects crafted with innovation and strategy.
             </p>
           </div>
 
-          {/* Portfolio Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioItems.map((item, index) => (
+          {/* Filters */}
+          <div className="flex flex-wrap justify-center gap-3 mb-16 fade-in-up stagger-1">
+            {filters.map((filter) => (
+              <Button
+                key={filter}
+                variant={activeFilter === filter ? "default" : "outline"}
+                onClick={() => setActiveFilter(filter)}
+                className={`${
+                  activeFilter === filter 
+                    ? 'bg-primary text-white' 
+                    : 'border-border hover:bg-primary/10'
+                }`}
+              >
+                {filter}
+              </Button>
+            ))}
+          </div>
+
+          {/* Projects Grid */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {filteredProjects.map((project, index) => (
               <Card 
                 key={index}
-                className={`overflow-hidden hover-lift border-border bg-card group cursor-pointer fade-in-up stagger-${(index % 6) + 1}`}
+                className={`group overflow-hidden border-border hover-lift cursor-pointer fade-in-up stagger-${(index % 6) + 2}`}
               >
-                <div className="relative overflow-hidden">
+                <div className="aspect-[4/3] overflow-hidden relative">
                   <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-6">
-                      <p className="text-primary text-sm font-semibold mb-1">{item.category}</p>
-                    </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-6">
+                    <p className="text-primary text-sm font-semibold mb-2">{project.tag}</p>
+                    <h3 className="text-white text-xl font-bold mb-4 text-center">{project.title}</h3>
+                    <Button variant="outline" size="sm" className="border-white text-white hover:bg-white hover:text-primary">
+                      View Case Study
+                    </Button>
                   </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
-                    {item.title}
-                  </h3>
                 </div>
               </Card>
             ))}

@@ -21,7 +21,7 @@ const Header = () => {
             <img 
               src={logo} 
               alt="Dezhyne Logo" 
-              className="h-16 w-auto object-contain"
+              className="h-20 w-auto object-contain transition-transform duration-300 hover:scale-105"
             />
           </Link>
           
@@ -30,17 +30,18 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-sm font-medium transition-all duration-300 relative group ${
                   location.pathname === link.path
                     ? 'text-primary font-semibold'
                     : 'text-foreground'
                 }`}
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
             <Link to="/contact">
-              <Button size="default" className="bg-primary hover:bg-primary/90">
+              <Button size="default" className="bg-primary hover:bg-primary/90 hover-glow">
                 Let's Talk
               </Button>
             </Link>
