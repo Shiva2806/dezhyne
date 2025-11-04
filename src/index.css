@@ -8,49 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Cinematic Dark Theme - Main colors */
-    --background: 222 47% 7%;
-    --foreground: 210 20% 98%;
+    /* Clean White Premium Theme */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 4%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 20% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
 
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
 
-    /* Electric Blue Accent */
+    /* Modern Blue Accent */
     --primary: 217 91% 60%;
-    --primary-foreground: 210 20% 98%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 47% 12%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 10% 4%;
 
-    --muted: 222 47% 12%;
-    --muted-foreground: 215 16% 65%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
 
     --accent: 217 91% 60%;
-    --accent-foreground: 210 20% 98%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 222 47% 15%;
-    --input: 222 47% 15%;
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
     --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Cinematic gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(222 47% 7%) 0%, hsl(222 47% 10%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(222 47% 9%) 0%, hsl(222 47% 11%) 100%);
+    /* Light gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210 40% 98%) 0%, hsl(220 40% 96%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(240 5% 98%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 70%) 100%);
+    --gradient-vibrant-1: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(142 76% 36%) 100%);
+    --gradient-vibrant-2: linear-gradient(135deg, hsl(271 76% 53%) 0%, hsl(25 95% 53%) 100%);
+    --gradient-vibrant-3: linear-gradient(135deg, hsl(338 90% 63%) 0%, hsl(25 100% 63%) 100%);
     
-    /* Shadows with blue glow */
-    --shadow-glow: 0 0 40px hsla(217 91% 60% / 0.15);
-    --shadow-card: 0 4px 20px hsla(0 0% 0% / 0.3);
+    /* Soft shadows */
+    --shadow-soft: 0 2px 8px hsla(240 10% 4% / 0.08);
+    --shadow-card: 0 4px 20px hsla(240 10% 4% / 0.12);
+    --shadow-hover: 0 8px 30px hsla(240 10% 4% / 0.16);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
 
@@ -69,17 +74,31 @@ All colors MUST be HSL.
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-foreground;
+    @apply font-bold text-foreground tracking-tight;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    @apply text-muted-foreground leading-relaxed;
   }
 }
 
 @layer components {
   .hover-lift {
-    @apply transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_8px_30px_rgba(59,130,246,0.2)];
+    @apply transition-all duration-500 hover:translate-y-[-8px];
+    box-shadow: var(--shadow-soft);
+  }
+
+  .hover-lift:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .hover-scale {
+    @apply transition-all duration-300 hover:scale-105;
   }
 
   .hover-glow {
-    @apply transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)];
+    @apply transition-all duration-300;
   }
 
   .gradient-text {
@@ -102,10 +121,36 @@ All colors MUST be HSL.
     transform: translateY(0);
   }
 
+  .fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+  }
+
+  .slide-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .underline-input {
+    @apply border-0 border-b-2 border-border bg-transparent px-0 py-3 rounded-none focus-visible:ring-0 focus-visible:border-primary transition-colors;
+  }
+
   .stagger-1 { transition-delay: 0.1s; }
   .stagger-2 { transition-delay: 0.2s; }
   .stagger-3 { transition-delay: 0.3s; }
   .stagger-4 { transition-delay: 0.4s; }
   .stagger-5 { transition-delay: 0.5s; }
   .stagger-6 { transition-delay: 0.6s; }
+  .stagger-7 { transition-delay: 0.7s; }
+  .stagger-8 { transition-delay: 0.8s; }
 }

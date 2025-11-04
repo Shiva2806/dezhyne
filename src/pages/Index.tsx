@@ -1,27 +1,22 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Code, ShoppingCart, Share2, Star } from 'lucide-react';
-import heroImg from '@/assets/hero-bg-enhanced.jpg';
-import { useEffect, useState } from 'react';
-import portfolio1 from '@/assets/portfolio-1.jpg';
-import portfolio2 from '@/assets/portfolio-2.jpg';
-import portfolio3 from '@/assets/portfolio-3.jpg';
+import { Code, ShoppingCart, Share2, Star, Smartphone, Palette, ArrowRight } from 'lucide-react';
+import { useEffect } from 'react';
+import heroLight from '@/assets/hero-light.jpg';
+import serviceWeb from '@/assets/service-web.jpg';
+import serviceEcommerce from '@/assets/service-ecommerce.jpg';
+import serviceBranding from '@/assets/service-branding.jpg';
+import work1 from '@/assets/work-1.jpg';
+import work2 from '@/assets/work-2.jpg';
+import work3 from '@/assets/work-3.jpg';
+import blog1 from '@/assets/blog-1.jpg';
+import blog2 from '@/assets/blog-2.jpg';
+import blog3 from '@/assets/blog-3.jpg';
 
 const Index = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -34,154 +29,273 @@ const Index = () => {
       { threshold: 0.1 }
     );
 
-    document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+    document.querySelectorAll('.fade-in-up, .fade-in, .slide-in-left').forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
+
   const services = [
     {
       icon: Code,
       title: 'Web Development',
-      description: 'Custom websites and web applications built with cutting-edge technologies for optimal performance and user experience.',
+      description: 'Build powerful, scalable websites with modern frameworks and technologies.',
+      image: serviceWeb
     },
     {
       icon: ShoppingCart,
-      title: 'Ecommerce Solutions',
-      description: 'Comprehensive online store development with secure payment integration and inventory management systems.',
+      title: 'E-commerce',
+      description: 'Complete ecommerce solutions from concept to launch with secure payments.',
+      image: serviceEcommerce
     },
     {
-      icon: Share2,
-      title: 'Social Media Marketing',
-      description: 'Strategic social media campaigns designed to boost engagement, grow your audience, and drive conversions.',
+      icon: Palette,
+      title: 'Branding',
+      description: 'Create memorable brand identities that resonate with your audience.',
+      image: serviceBranding
     },
   ];
 
-  const portfolioItems = [
-    { image: portfolio1, title: 'Modern Ecommerce Platform' },
-    { image: portfolio2, title: 'Social Analytics Dashboard' },
-    { image: portfolio3, title: 'Corporate Website Redesign' },
+  const works = [
+    { image: work1, title: 'Luxury Fashion E-commerce', tag: 'E-commerce' },
+    { image: work2, title: 'Mobile Banking App', tag: 'UI/UX' },
+    { image: work3, title: 'Brand Identity System', tag: 'Branding' },
   ];
 
-  const testimonials = [
+  const blogs = [
     {
-      text: 'Working with Dezhyne transformed our digital presence completely. Their attention to detail and innovative approach exceeded all our expectations.',
-      author: 'Sarah Johnson',
-      role: 'CEO, TechStart Inc.',
+      image: blog1,
+      title: 'The Future of Web Design in 2025',
+      description: 'Exploring emerging trends in modern web design',
+      readTime: '5 min read'
     },
     {
-      text: 'The team at Dezhyne delivered exceptional results on time and within budget. Their expertise in web development is unmatched.',
-      author: 'Michael Chen',
-      role: 'Founder, Digital Ventures',
+      image: blog2,
+      title: 'Building Scalable E-commerce Platforms',
+      description: 'Best practices for enterprise-level online stores',
+      readTime: '7 min read'
+    },
+    {
+      image: blog3,
+      title: 'The Power of Micro-interactions',
+      description: 'How small details create memorable experiences',
+      readTime: '4 min read'
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.85)), url(${heroImg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            transform: `translateY(${scrollY * 0.5}px)`,
-            willChange: 'transform',
-          }}
-        />
-        <div className="container mx-auto text-center max-w-4xl relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in drop-shadow-lg">
-            Crafting the Future of
-            <span className="block gradient-text">Digital Experiences</span>
-          </h1>
-          <p className="text-xl text-foreground mb-8 max-w-2xl mx-auto animate-fade-in drop-shadow-md">
-            We transform visionary ideas into stunning digital realities. Our expert team delivers innovative solutions that drive growth and captivate audiences.
-          </p>
-          <Link to="/portfolio">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 hover-glow text-lg px-8 py-6 animate-fade-in shadow-lg">
-              View Our Work
-            </Button>
-          </Link>
+      <section 
+        className="pt-32 pb-24 px-6 relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${heroLight})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-sm" />
+        <div className="container mx-auto relative z-10">
+          <div className="max-w-4xl mx-auto text-center fade-in-up">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
+              Crafting the Future of <br />
+              <span className="gradient-text">Digital Experiences</span>
+            </h1>
+            <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+              We turn ideas into stunning digital realities through innovative design and cutting-edge technology.
+            </p>
+            <Link to="/portfolio">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg">
+                Get Started
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Services Snippet */}
-      <section className="py-20 px-6">
+      {/* Clients Section */}
+      <section className="py-16 bg-secondary">
+        <div className="container mx-auto px-6">
+          <p className="text-center text-muted-foreground mb-8 fade-in">Trusted by Leading Brands</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all fade-in">
+            <div className="h-12 w-32 bg-muted rounded" />
+            <div className="h-12 w-32 bg-muted rounded" />
+            <div className="h-12 w-32 bg-muted rounded" />
+            <div className="h-12 w-32 bg-muted rounded" />
+            <div className="h-12 w-32 bg-muted rounded" />
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-24 px-6 bg-white">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">Our Core Services</h2>
-          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Comprehensive digital solutions tailored to elevate your business and engage your audience.
-          </p>
-          
+          <div className="text-center mb-16 fade-in-up">
+            <h2 className="text-5xl font-bold mb-4">Our Core Services</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Comprehensive digital solutions tailored to your business needs
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <Card 
                 key={index}
-                className={`p-8 bg-card hover-lift border-border fade-in-up stagger-${index + 1}`}
+                className={`group overflow-hidden border-border hover-lift cursor-pointer fade-in-up stagger-${index + 1}`}
               >
-                <service.icon className="w-12 h-12 text-primary mb-4" />
-                <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                <p className="text-muted-foreground">{service.description}</p>
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-8">
+                  <service.icon className="w-10 h-10 text-primary mb-4" />
+                  <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Portfolio Snippet */}
-      <section className="py-20 px-6 bg-card">
+      {/* Our Work Section */}
+      <section className="py-24 px-6 bg-secondary">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">Recent Projects</h2>
-          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            A showcase of our latest work, demonstrating our commitment to excellence and innovation.
-          </p>
-          
+          <div className="text-center mb-16 fade-in-up">
+            <h2 className="text-5xl font-bold mb-4">Our Work</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              A showcase of projects where creativity meets results
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8">
-            {portfolioItems.map((item, index) => (
+            {works.map((work, index) => (
               <Card 
                 key={index}
-                className={`overflow-hidden hover-lift border-border bg-background fade-in-up stagger-${index + 1}`}
+                className={`group overflow-hidden border-border hover-lift cursor-pointer fade-in-up stagger-${index + 1}`}
               >
-                <img 
-                  src={item.image} 
-                  alt={item.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold">{item.title}</h3>
+                <div className="aspect-[4/3] overflow-hidden relative">
+                  <img 
+                    src={work.image} 
+                    alt={work.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div>
+                      <p className="text-primary text-sm font-semibold mb-1">{work.tag}</p>
+                      <h3 className="text-white text-xl font-bold">{work.title}</h3>
+                    </div>
+                  </div>
                 </div>
               </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-12 fade-in-up stagger-4">
+            <Link to="/portfolio">
+              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white">
+                View All Projects
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Blogs Preview */}
+      <section className="py-24 px-6 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 fade-in-up">
+            <h2 className="text-5xl font-bold mb-4">Latest Insights</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Thoughts, stories and ideas from our team
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {blogs.map((blog, index) => (
+              <Card 
+                key={index}
+                className={`group overflow-hidden border-border hover-lift cursor-pointer fade-in-up stagger-${index + 1}`}
+              >
+                <div className="aspect-video overflow-hidden relative">
+                  <img 
+                    src={blog.image} 
+                    alt={blog.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs text-muted-foreground mb-3">{blog.readTime}</p>
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{blog.title}</h3>
+                  <p className="text-muted-foreground text-sm">{blog.description}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-12 fade-in-up stagger-4">
+            <Link to="/blogs">
+              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white">
+                Read More Articles
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Approach */}
+      <section className="py-24 px-6 bg-gradient-to-br from-primary/5 to-purple-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 fade-in-up">
+            <h2 className="text-5xl font-bold mb-4">Our Approach</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              A proven process that delivers exceptional results
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto relative">
+            <div className="hidden md:block absolute top-12 left-0 right-0 h-1 bg-gradient-to-r from-primary to-purple-500" style={{ width: '75%', marginLeft: '12.5%' }} />
+            
+            {['Strategy', 'Design', 'Development', 'Delivery'].map((step, index) => (
+              <div key={index} className={`text-center relative fade-in-up stagger-${index + 1}`}>
+                <div className="w-24 h-24 rounded-full bg-white border-4 border-primary mx-auto mb-4 flex items-center justify-center text-3xl font-bold text-primary relative z-10">
+                  {index + 1}
+                </div>
+                <h3 className="text-xl font-bold mb-2">{step}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {index === 0 && 'Understanding your vision and goals'}
+                  {index === 1 && 'Crafting beautiful interfaces'}
+                  {index === 2 && 'Building with precision'}
+                  {index === 3 && 'Launching with excellence'}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">What Our Clients Say</h2>
-          <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Don't just take our word for it - hear from businesses we've helped transform.
+      {/* CTA Section */}
+      <section className="py-24 px-6 bg-gradient-to-r from-primary to-blue-600 text-white">
+        <div className="container mx-auto text-center fade-in-up">
+          <h2 className="text-5xl font-bold mb-6">Let's start something great together</h2>
+          <p className="text-xl mb-10 opacity-90 max-w-2xl mx-auto">
+            Ready to transform your digital presence? Get in touch and let's create something amazing.
           </p>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className={`p-8 bg-card border-border fade-in-up stagger-${index + 1}`}>
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-lg mb-6 text-muted-foreground italic">"{testimonial.text}"</p>
-                <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
+          <Link to="/contact">
+            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg">
+              Let's Talk
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 

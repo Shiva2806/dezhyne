@@ -78,14 +78,14 @@ const Portfolio = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
       
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
           {/* Page Title */}
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Work</h1>
+          <div className="text-center mb-16 max-w-3xl mx-auto fade-in-up">
+            <h1 className="text-6xl font-bold mb-6">Our Work</h1>
             <p className="text-xl text-muted-foreground">
               Explore our portfolio of successful projects. Each one represents our commitment to delivering exceptional digital experiences that drive real results for our clients.
             </p>

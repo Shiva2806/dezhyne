@@ -25,14 +25,14 @@ const Contact = () => {
     return () => observer.disconnect();
   }, []);
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
       
       <div className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
           {/* Page Title */}
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Get In Touch</h1>
+          <div className="text-center mb-16 max-w-3xl mx-auto fade-in-up">
+            <h1 className="text-6xl font-bold mb-6">Get In Touch</h1>
             <p className="text-xl text-muted-foreground">
               Ready to start your next project? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
             </p>
